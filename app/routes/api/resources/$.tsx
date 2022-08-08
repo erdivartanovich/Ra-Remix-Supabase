@@ -1,10 +1,10 @@
 // in app/routes/admin/api/$.tsx
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import proxyUrl from "./proxyUrl";
 
 // handle read requests (getOne, getList, getMany, getManyReference)
 export const loader: LoaderFunction = ({ request }) => {
-  const apiUrl = getSupabaseUrlFromRequestUrl(request.url);
-
+  const apiUrl = proxyUrl(request.url);
   return fetch(apiUrl, {
     headers: {
       prefer: request.headers.get("prefer") ?? "",
@@ -17,8 +17,7 @@ export const loader: LoaderFunction = ({ request }) => {
 
 // handle write requests (create, update, delete, updateMany, deleteMany)
 export const action: ActionFunction = ({ request }) => {
-  const apiUrl = getSupabaseUrlFromRequestUrl(request.url);
-
+  const apiUrl = proxyUrl(request.url);
   return fetch(apiUrl, {
     method: request.method,
     body: request.body,
@@ -29,12 +28,4 @@ export const action: ActionFunction = ({ request }) => {
       Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE}`,
     },
   });
-};
-
-const ADMIN_PREFIX = "/admin/api";
-
-const getSupabaseUrlFromRequestUrl = (url: string) => {
-  const startOfRequest = url.indexOf(ADMIN_PREFIX);
-  const query = url.substring(startOfRequest + ADMIN_PREFIX.length);
-  return `${process.env.SUPABASE_URL}/rest/v1${query}`;
 };
