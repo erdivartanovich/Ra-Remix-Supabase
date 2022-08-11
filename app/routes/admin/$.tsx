@@ -1,4 +1,4 @@
-import Admin from "../../modules/admin/App";
+import Admin from "~/modules/admin/App";
 import styles from "~/styles/app.css";
 
 export function links() {

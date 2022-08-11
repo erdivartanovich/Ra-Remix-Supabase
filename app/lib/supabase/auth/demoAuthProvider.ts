@@ -1,11 +1,11 @@
 import {
-  IAuthBasicLoginParams,
+  IAuthLoginParams,
   IAuthCheckErrorParams,
   IAuthIdentity,
 } from "./types";
 
 const authProvider = {
-  login: ({ username, password }: IAuthBasicLoginParams) => {
+  login: ({ username, password }: IAuthLoginParams) => {
     if (username !== "demo" || password !== "demo") {
       return Promise.reject();
     }

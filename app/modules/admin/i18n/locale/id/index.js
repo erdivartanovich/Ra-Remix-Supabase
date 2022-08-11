@@ -1,4 +1,4 @@
-const localeIndo = {
+const locale = {
   ra: {
     action: {
       add_filter: "Tambahkan filter",
@@ -13,7 +13,7 @@ const localeIndo = {
       create_item: "Buat %{item}",
       delete: "Hapus",
       edit: "Ubah",
-      export: "Ekspor",
+      export: "Eksport",
       list: "Daftar",
       refresh: "Perbaharui",
       remove_filter: "Hapus filter",
@@ -153,4 +153,4 @@ const localeIndo = {
     },
   },
 };
-export default localeIndo;
+export default locale;
