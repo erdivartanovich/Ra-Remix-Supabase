@@ -17,6 +17,7 @@ export const action: ActionFunction = async ({ request }) => {
   });
 
   cookiePayload.accessToken = session?.access_token;
+  cookiePayload.maxAge = session?.expires_in;
 
   return jsonWithCookie({
     status: session?.access_token ? 200 : 401,
