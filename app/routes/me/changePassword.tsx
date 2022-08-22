@@ -1,7 +1,6 @@
 import { useParams } from "@remix-run/react";
 import { useEffect, useState } from "react";
 
-/* 123456789A** */
 export default function ChangePassword() {
   const { redirectTo } = useParams<{
     redirectTo: string;
@@ -17,7 +16,7 @@ export default function ChangePassword() {
   return (
     <form
       method="post"
-      action={`/api/auth/change-password?accessToken=${token}&redirectTo=${redirectUrl}`}
+      action={`/api/auth/changePassword?accessToken=${token}&redirectTo=${redirectUrl}`}
     >
       <p>
         <label>

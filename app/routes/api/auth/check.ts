@@ -1,4 +1,5 @@
-import { ActionFunction, json, LoaderFunction } from "@remix-run/node";
+import { json, LoaderFunction } from "@remix-run/node";
+import { actionNotAllowed } from "~/lib/http/notAllowed";
 import { parseAuth } from "~/lib/http/parseAuth";
 
 // const getModuleReferer = (request: Request) => {
@@ -23,6 +24,4 @@ export const loader: LoaderFunction = async ({ request }) => {
   );
 };
 
-export const action: ActionFunction = async () => {
-  return new Response("METHOD NOT ALLOWED", { status: 405 });
-};
+export const action = actionNotAllowed;
