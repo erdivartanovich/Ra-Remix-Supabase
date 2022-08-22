@@ -12,7 +12,7 @@ export default function ChangePassword() {
     setToken(accessToken);
   }, []);
 
-  const redirectUrl = redirectTo || "/me/123";
+  const redirectUrl = redirectTo || "/me/123"; //TODO: handle profile via your profile/member service
   return (
     <form
       method="post"
