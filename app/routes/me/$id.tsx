@@ -1,14 +1,14 @@
-import { useEffect } from "react";
+import { LoaderFunction, redirect } from "@remix-run/node";
+import { parseAuth } from "~/lib/http/parseAuth";
+
+export const loader: LoaderFunction = async ({ request }) => {
+  if (!(await parseAuth(request))) {
+    return redirect("/admin/login");
+  }
+  return true;
+};
 
 export default function Me() {
-  useEffect(() => {
-    const checkAuth = async () => {
-      const resp = await fetch("/api/auth/check").then((resp) => resp.json());
-      console.log("check Auth =====", resp);
-    };
-    checkAuth();
-  }, []);
-
   return (
     <div>
       <p>Here's your hilarious joke:</p>

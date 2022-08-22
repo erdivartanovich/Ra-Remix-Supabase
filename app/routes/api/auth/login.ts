@@ -20,6 +20,7 @@ export const action: ActionFunction = async ({ request }) => {
   cookiePayload.accessToken = session?.access_token;
 
   return jsonWithCookie({
+    status: session?.access_token ? 200 : 401,
     payload: { user, error },
     cookie,
     cookiePayload,

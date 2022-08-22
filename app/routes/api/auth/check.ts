@@ -1,11 +1,20 @@
 import { ActionFunction, json, LoaderFunction } from "@remix-run/node";
-import { parseCookieFromHeader } from "~/lib/http/cookie";
+import { parseAuth } from "~/lib/http/parseAuth";
+
+// const getModuleReferer = (request: Request) => {
+//   const referer = request.headers.get("referer") as string;
+//   if (referer) {
+//     const { pathname } = new URL(request.headers.get("referer") as string);
+//     return pathname.split("/")?.[1];
+//   } else {
+//     return "";
+//   }
+// };
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const { cookiePayload } = await parseCookieFromHeader(request, "auth");
-  const { accessToken } = cookiePayload;
-  console.log("CHECK ACCESS TOKEN ================", accessToken);
+  const accessToken = await parseAuth(request);
   const error = !accessToken;
+
   return json(
     { error },
     {

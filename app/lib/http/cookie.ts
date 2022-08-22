@@ -24,12 +24,13 @@ export const parseCookieFromHeader = async (
 };
 
 export const jsonWithCookie = async ({
+  status = 200,
   payload,
   cookie,
   cookiePayload,
 }: IResponseWithCookieParam) => {
   return json(payload, {
-    status: 200,
+    status,
     headers: {
       "Set-Cookie": await cookie.serialize(cookiePayload),
     },
