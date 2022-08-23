@@ -1,4 +1,4 @@
-import { ActionFunction, LoaderFunction } from "@remix-run/node";
+import { ActionFunction } from "@remix-run/node";
 import { jsonWithCookie, parseCookieFromHeader } from "~/lib/http/cookie";
 import { loaderNotAllowed } from "~/lib/http/notAllowed";
 import { signInWithEmail } from "~/lib/supabase/auth";
