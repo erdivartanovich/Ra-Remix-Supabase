@@ -1,9 +1,8 @@
 import postgrestRestProvider from "@promitheus/ra-data-postgrest";
 import polyglotI18nProvider from "ra-i18n-polyglot";
-import { Admin, I18nProvider, ListGuesser, Resource } from "react-admin";
+import { Admin, I18nProvider, ListGuesser, Resource, Login } from "react-admin";
 import authProvider from "~/lib/supabase/auth/authProvider";
 import localeIndo from "./i18n/locale/id";
-import { Admin, Login } from "react-admin";
 
 const dataProvider = postgrestRestProvider("/api/resources");
 const translation: Record<string, any> = {

@@ -1,14 +1,22 @@
-import type {
+import {
   ActionFunction,
   LinksFunction,
+  LoaderFunction,
   MetaFunction,
+  redirect,
 } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 
-import { login, createUserSession, register } from "~/core/session.server";
+import {
+  login,
+  createUserSession,
+  register,
+  getUserId,
+} from "~/core/session.server";
 import { db } from "~/core/db.server";
 import stylesUrl from "~/styles/login.css";
+import { allowedLoginRedirectUrls } from "~/core/urls";
 
 export const meta: MetaFunction = () => {
   return {
@@ -33,12 +41,13 @@ function validatePassword(password: unknown) {
   }
 }
 
-function validateUrl(url: any) {
-  let urls = ["/me/123", "/jokes", "/", "https://remix.run"];
-  if (urls.includes(url)) {
+function validateRedirectUrl(url: any) {
+  const regex = new RegExp(`^${url.split("/").slice(0, 2).join("/")}`);
+  const match = allowedLoginRedirectUrls.some((url) => url.match(regex));
+  if (match) {
     return url;
   }
-  return "/jokes";
+  return "/";
 }
 
 type ActionData = {
@@ -49,12 +58,21 @@ type ActionData = {
 
 const badRequest = (data: ActionData) => json(data, { status: 400 });
 
+export const loader: LoaderFunction = async ({ request }) => {
+  const userId = await getUserId(request);
+  if (userId) {
+    // Redirect to the home page if they are already signed in.
+    return redirect("/");
+  }
+  return true;
+};
+
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   const loginType = form.get("loginType");
   const username = form.get("username");
   const password = form.get("password");
-  const redirectTo = validateUrl(form.get("redirectTo") || "/jokes");
+  const redirectTo = validateRedirectUrl(form.get("redirectTo") || "/");
   if (
     typeof loginType !== "string" ||
     typeof username !== "string" ||

@@ -1,10 +1,8 @@
 import { LoaderFunction, redirect } from "@remix-run/node";
-import { parseAuth } from "~/lib/http/parseAuth";
+import { requireUserSession } from "~/core/session.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
-  if (!(await parseAuth(request))) {
-    return redirect("/admin/login");
-  }
+  await requireUserSession(request);
   return true;
 };
 
