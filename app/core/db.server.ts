@@ -1,18 +1,6 @@
-type User = {
-  id: string;
-  username: string;
-  passwordHash: string;
-};
+import { IUser } from "./models/User";
 
-const users: User[] = [
-  {
-    id: 0,
-    username: "erdivartanovich@gmail.com",
-    passwordHash:
-      "$2a$10$aQR9FSxCHwnFBLmrrQTMMOKf/QAnnT8YHHfxZ2u3kfBaZ0MElzXGq",
-  },
-];
-
+const users = (global as any).users as IUser[];
 export const db = {
   user: {
     create: async (payload: {
@@ -28,6 +16,7 @@ export const db = {
       select?: { id: boolean; username: boolean };
     }) => {
       const { id, username } = findOpts.where;
+      console.log("users ==========", users);
       if (id) {
         return users[Number(id)];
       } else {

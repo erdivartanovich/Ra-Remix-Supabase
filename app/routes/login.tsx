@@ -20,8 +20,8 @@ import { allowedLoginRedirectUrls } from "~/core/urls";
 
 export const meta: MetaFunction = () => {
   return {
-    title: "Remix Jokes | Login",
-    description: "Login to submit your own jokes to Remix Jokes!",
+    title: "Flix | Login",
+    description: "Login to continue to Flix!",
   };
 };
 
@@ -132,7 +132,7 @@ export default function Login() {
   return (
     <div className="container">
       <div className="content" data-light="">
-        <h1>Login</h1>
+        <h1>Flix</h1>
         <Form method="post">
           <input
             type="hidden"
@@ -223,9 +223,6 @@ export default function Login() {
         <ul>
           <li>
             <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/jokes">Jokes</Link>
           </li>
         </ul>
       </div>

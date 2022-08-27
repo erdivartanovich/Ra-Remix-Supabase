@@ -1,6 +1,5 @@
 import { createCookieSessionStorage, redirect } from "@remix-run/node";
 import bcrypt from "bcryptjs";
-
 import { db } from "./db.server";
 
 type LoginForm = {
@@ -13,7 +12,7 @@ export async function register({ username, password }: LoginForm) {
   const user = await db.user.create({
     data: { username, passwordHash },
   });
-  console.log("CREATE USER =====================", user);
+  console.log("CREATE USER =====================", user, passwordHash);
   return { id: user.id, username };
 }
 

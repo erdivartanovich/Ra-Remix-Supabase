@@ -1,5 +1,7 @@
-import type { LinksFunction, LoaderFunction } from "@remix-run/node";
-import { requireUserSession } from "~/core/session.server";
+import { json, LinksFunction, LoaderFunction } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
+import { IUser } from "~/core/models/User";
+import { getUser, requireUserSession } from "~/core/session.server";
 
 import stylesUrl from "~/styles/index.css";
 
@@ -8,10 +10,12 @@ export const links: LinksFunction = () => {
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const session = await requireUserSession(request);
-  return !!session;
+  await requireUserSession(request);
+  const user = await getUser(request);
+  return json(user);
 };
 
 export default function IndexRoute() {
-  return <div>Hello Index Route</div>;
+  const user = useLoaderData<IUser>();
+  return <div>Hello {user.username}</div>;
 }
