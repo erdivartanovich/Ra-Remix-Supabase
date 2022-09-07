@@ -2,7 +2,7 @@ type RequestParams = {
   method?: string;
   path: string;
   body?: Object;
-  headers: Headers;
+  headers?: Headers;
 };
 
 export const request = async ({

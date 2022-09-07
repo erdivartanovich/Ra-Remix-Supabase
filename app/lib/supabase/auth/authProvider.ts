@@ -40,7 +40,7 @@ const authProvider = {
   },
   checkError: (error: IAuthCheckErrorParams) => {
     const status = error.status;
-    if (status === 401 || status === 403) {
+    if (status === 401) {
       return Promise.reject();
     }
     // other error code (404, 500, etc): no need to log out
@@ -54,8 +54,12 @@ const authProvider = {
       id: "user",
       fullName: "John Doe",
     }),
-  getPermissions: (): Promise<any> => {
-    return Promise.resolve();
+  getPermissions: async (): Promise<any> => {
+    const permissions = await request({
+      path: "/api/resources/permissions?select=acl",
+      headers: new Headers({ Accept: "application/vnd.pgrst.object+json" }),
+    });
+    return Promise.resolve(permissions);
   },
 };
 

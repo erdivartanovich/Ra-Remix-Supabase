@@ -78,6 +78,7 @@ export default function App() {
 export function CatchBoundary() {
   const caught = useCatch();
 
+  console.error(caught);
   return (
     <Document title={`${caught.status} ${caught.statusText}`}>
       <div className="error-container">
