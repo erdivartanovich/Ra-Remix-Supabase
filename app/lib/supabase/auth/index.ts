@@ -9,6 +9,13 @@ export const getUser = async (accessToken: string) => {
   return await supabase.auth.api.getUser(accessToken);
 };
 
+export const signUp = async ({ email, password }: ISignInWithEmailParams) => {
+  return await supabase.auth.signUp({
+    email,
+    password,
+  });
+};
+
 export const signInWithEmail = async ({
   email,
   password,

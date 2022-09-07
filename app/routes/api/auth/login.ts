@@ -15,6 +15,9 @@ export const action: ActionFunction = async ({ request }) => {
     email: username,
     password,
   });
+  console.log(user);
+  console.log(session);
+  console.log(session?.access_token);
 
   cookiePayload.accessToken = session?.access_token;
   cookiePayload.maxAge = session?.expires_in;

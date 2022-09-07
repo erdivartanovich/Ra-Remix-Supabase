@@ -48,7 +48,7 @@ const locale = {
       loading: "Pemuatan",
       not_found: "Tidak ditemukan",
       show: "%{name} #%{id}",
-      empty: "%{name} Belum ada.",
+      empty: "%{name} kosong.",
       invite: "Apakah anda ingin menambahkan satu?",
     },
     input: {
@@ -94,7 +94,7 @@ const locale = {
       loading: "Halaman ini sedang memuat, silahkan tunggu sebentar",
       no: "Tidak",
       not_found:
-        "Entah Anda mengetikkan URL yang salah, atau Anda memiliki link yang salah.",
+        "Entah Anda mengetikkan URL yang salah, Anda tidak punya hak access, atau Anda memiliki link yang salah.",
       yes: "Ya",
       unsaved_changes:
         "Beberapa perubahan belum anda simpan. Anda yakin ingin mengabaikannya?",
@@ -138,7 +138,8 @@ const locale = {
       i18n_error: "Tidak dapat memuat terjemahan untuk bahasa yang ditentukan",
       canceled: "Aksi Telah dibatalkan",
       logged_out: "Sesi Anda telah berakhir, harap sambungkan kembali.",
-      not_authorized: "Anda tidak diizinkan untuk mengakses sumber daya ini.",
+      not_authorized:
+        "Anda tidak diizinkan untuk mengakses atau mengubah sumber daya ini.",
     },
     validation: {
       required: "Wajib",
